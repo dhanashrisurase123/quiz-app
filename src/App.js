@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector } from "react-redux";
+import StartQuiz from "./components/StartQuiz";
+import Quiz from "./components/Quiz";
+import Timer from "./components/Timer";
+import Result from "./components/Result";
 
 function App() {
+   const { started, submitted } = useSelector(state => state.quiz);
+
+  if (!started) return <StartQuiz />;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {!submitted && <Timer />}
+      <Quiz />
+      <Result />
+    </>
   );
 }
 
